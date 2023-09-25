@@ -16,6 +16,7 @@ Quad::~Quad()
 
 void Quad::CreateQuad()
 {
+    /*
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(vertexList);
 
@@ -26,7 +27,7 @@ void Quad::CreateQuad()
 	GraphicsEngine::get()->getShaderBufferAndSize(&shader_byte_code, &size_shader);
 
 	m_vb->load(&vertexList[0], sizeof(Vertex), size_list, shader_byte_code, size_shader);
-	
+	*/
 }
 
 void Quad::DrawQuad()
