@@ -1,0 +1,3 @@
+﻿  AppWindow.cpp
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(94,29): warning C4305: '=': truncation from 'double' to 'float'
+  DirectXProjectSetup.vcxproj -> E:\.School\GDENG03\DirectXProjectSetup\x64\Debug\DirectXProjectSetup.exe
