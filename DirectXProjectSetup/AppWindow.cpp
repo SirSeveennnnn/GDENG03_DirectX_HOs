@@ -2,6 +2,8 @@
 #include <Windows.h>
 
 
+
+
 struct vec3
 {
 	float x, y, z;
@@ -20,6 +22,7 @@ __declspec(align(16))
 struct constant
 {
 	float m_angle;
+    float m_time;
 };
 
 
@@ -35,6 +38,8 @@ AppWindow::~AppWindow()
 void AppWindow::onCreate()
 {
 	Window::onCreate();
+
+    EngineTime::initialize();
 	GraphicsEngine::get()->init();
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
@@ -44,10 +49,10 @@ void AppWindow::onCreate()
 	vertex list[] =
 	{
 		//X - Y - Z
-		{-0.5f,-0.5f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 }, // POS1
-		{-0.5f,0.5f,0.0f,     -0.11f,0.78f,0.0f,    1,1,0,  0,1,1 }, // POS2
-		{ 0.5f,-0.5f,0.0f,     0.75f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS2
-		{ 0.5f,0.5f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,0,1 }
+		{-0.32f,0.11f,0.0f,    -0.32f,-0.11f,0.0f,   0,0,0,  0,1,0 }, // POS1
+		{-0.11f,-0.78f,0.0f,     -0.11f,0.78f,0.0f,    1,1,0,  0,1,1 }, // POS2
+		{ -0.75f,0.73f,0.0f,     0.75f,-0.73f,0.0f,   0,0,1,  1,0,0 },// POS2
+		{ -0.88f,-0.77f,0.0f,      0.88f,0.77f,0.0f,    1,1,1,  0,0,1 }
 	};
 
 	m_vb = GraphicsEngine::get()->createVertexBuffer();
@@ -75,8 +80,12 @@ void AppWindow::onCreate()
 
 }
 
+float elapsedTime = 0;
+bool change = false;
 void AppWindow::onUpdate()
 {
+    EngineTime::LogFrameStart();
+
 	Window::onUpdate();
 	
 	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,0, 0.3f, 0.4f, 1);
@@ -93,6 +102,28 @@ void AppWindow::onUpdate()
 	constant cc;
 	cc.m_angle = m_angle;
 
+    
+    if (elapsedTime >= 5)
+    {
+        change = true;
+    }
+    else if (elapsedTime <= 1)
+    {
+        change = false;
+    }
+
+    if (elapsedTime >= 1 && change == true)
+    {
+        elapsedTime -= EngineTime::getDeltaTime() * 100.0;
+    }
+    else if (elapsedTime <= 5 && change == false)
+    {
+        elapsedTime += EngineTime::getDeltaTime() * 100.0;
+    }
+
+    cc.m_time = pow(elapsedTime, 1.5f);
+    
+
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
 
 	GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
@@ -107,6 +138,12 @@ void AppWindow::onUpdate()
 	// FINALLY DRAW THE TRIANGLE
 	GraphicsEngine::get()->getImmediateDeviceContext()->drawTriangleStrip(m_vb->getSizeVertexList(), 0);
 	m_swap_chain->present(true);
+
+    EngineTime::LogFrameEnd();
+
+    cout << "Delta Time: " << EngineTime::getDeltaTime() << endl;
+    cout << "Elapsed Time: " << elapsedTime << endl;
+
 }
 
 void AppWindow::onDestroy()

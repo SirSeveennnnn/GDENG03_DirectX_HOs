@@ -1,4 +1,4 @@
 ﻿  AppWindow.cpp
-  Quad.cpp
-  Generating Code...
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(117,51): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(121,51): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   DirectXProjectSetup.vcxproj -> E:\.School\GDENG03\DirectXProjectSetup\Debug\DirectXProjectSetup.exe

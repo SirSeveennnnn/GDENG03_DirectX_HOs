@@ -7,6 +7,7 @@
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "EngineTime.h"
 
 class AppWindow : public Window
 {

@@ -22,6 +22,9 @@
     <Filter Include="Structs">
       <UniqueIdentifier>{2eed9932-5c41-4354-8615-9c66d5307a78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\EngineTime">
+      <UniqueIdentifier>{c65227dc-2851-40c8-9129-7e8304fac9b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +55,12 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>Structs</Filter>
     </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="VertexShader.cpp" />
+    <ClCompile Include="EngineTime.cpp">
+      <Filter>Engine\EngineTime</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -78,6 +87,12 @@
     </ClInclude>
     <ClInclude Include="Vec3.h">
       <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="EngineTime.h">
+      <Filter>Engine\EngineTime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
