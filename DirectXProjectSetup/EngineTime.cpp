@@ -23,7 +23,7 @@ void EngineTime::LogFrameEnd() {
 }
 
 EngineTime::EngineTime() {
-    // Private constructor
+   
 }
 
 EngineTime::~EngineTime() {

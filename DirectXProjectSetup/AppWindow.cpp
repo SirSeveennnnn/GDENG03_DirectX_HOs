@@ -81,6 +81,7 @@ void AppWindow::onCreate()
 }
 
 float elapsedTime = 0;
+float multiplier = 0;
 bool change = false;
 void AppWindow::onUpdate()
 {
@@ -102,7 +103,7 @@ void AppWindow::onUpdate()
 	constant cc;
 	cc.m_angle = m_angle;
 
-    
+    /*
     if (elapsedTime >= 5)
     {
         change = true;
@@ -115,13 +116,17 @@ void AppWindow::onUpdate()
     if (elapsedTime >= 1 && change == true)
     {
         elapsedTime -= EngineTime::getDeltaTime() * 100.0;
+        multiplier += ((sin(EngineTime::getDeltaTime() * 100.0)) + 1.0f) / 2.0f);
     }
     else if (elapsedTime <= 5 && change == false)
     {
         elapsedTime += EngineTime::getDeltaTime() * 100.0;
     }
+    */
+    elapsedTime += EngineTime::getDeltaTime() * 100;
+    multiplier = (sin(elapsedTime) + 1.0f) / 2.0f;
 
-    cc.m_time = pow(elapsedTime, 1.5f);
+    cc.m_time = multiplier;
     
 
 	m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
