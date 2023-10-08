@@ -1,3 +1,20 @@
 ﻿  AppWindow.cpp
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(126,47): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(38,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(39,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(40,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(41,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(46,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(47,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(48,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(49,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(54,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(55,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(56,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(57,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(94,135): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(94,62): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(99,136): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(99,63): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(104,136): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(104,63): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
   DirectXProjectSetup.vcxproj -> E:\.School\GDENG03\DirectXProjectSetup\Debug\DirectXProjectSetup.exe
