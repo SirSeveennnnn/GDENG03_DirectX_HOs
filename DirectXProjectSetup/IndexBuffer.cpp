@@ -42,6 +42,11 @@ bool IndexBuffer::release()
     return true;
 }
 
+UINT IndexBuffer::getIndexSize()
+{
+    return this->m_size_list;
+}
+
 
 IndexBuffer::~IndexBuffer()
 {

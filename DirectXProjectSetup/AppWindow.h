@@ -11,12 +11,14 @@
 #include "Cube.h"
 #include <vector>
 
-class AppWindow : public Window
+#include "InputListener.h"
+
+class AppWindow : public Window, public InputListener
 {
 public:
     AppWindow();
 
-    void updateQuadPosition();
+    void UpdateCamera();
 
     ~AppWindow();
 
@@ -24,6 +26,18 @@ public:
     virtual void onCreate() override;
     virtual void onUpdate() override;
     virtual void onDestroy() override;
+
+
+    virtual void onKeyDown(int key) override;
+    virtual void onKeyUp(int key) override;
+
+    virtual void onMouseMove(const Point deltaPos);
+
+    virtual void onLeftMouseDown(const Point deltaPos);
+    virtual void onLeftMouseUp(const Point deltaPos);
+
+    virtual void onRightMouseDown(const Point deltaPos);
+    virtual void onRightMouseUp(const Point deltaPos);
 private:
     vector<Cube*> cubeList;
 
@@ -41,4 +55,13 @@ private:
     float m_delta_pos;
     float m_delta_scale;
     float m_delta_rot;
+
+    float m_rot_x = 0.0f;
+    float m_rot_y = 0.0f;
+
+    float m_scale_cube = 1;
+    float m_forward = 0.0f;
+    float m_rightward = 0.0f;
+    Matrix4x4 m_world_cam;
 };
+

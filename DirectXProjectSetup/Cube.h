@@ -13,7 +13,7 @@ class Cube : public GameObject
 {
 
 public:
-    Cube(float screenW, float screenH);
+    Cube(string name, float screenW, float screenH);
     ~Cube();
 
     void OnUpdate();
@@ -32,5 +32,6 @@ private:
     //temp
     float screenHeight = 0;
     float screenWidth = 0;
-};
 
+    float deltaScale;
+};

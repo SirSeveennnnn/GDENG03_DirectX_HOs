@@ -1,68 +1,63 @@
 #include "GameObject.h"
-#include <iostream>
 
-using namespace std;
-
-GameObject::GameObject()
+GameObject::GameObject(string name)
 {
-    cout << "GameObject Init" << endl;
- 
-    SetPosition(Vector3D(0, 0, 0));
-    SetScale(Vector3D(1, 1, 1));
-    //setRotationX(0);
-    //setRotationY(0);
-    //setRotationZ(0);
-
-    //cout << "Gameobject Pos: " << position.m_x << ", " << position.m_y << ", " << position.m_z << endl;
+    this->name = name;
+    this->localRotation = Vector3D::zeros();
+    this->localPosition = Vector3D::zeros();
+    this->localScale = Vector3D::ones();
 }
 
 GameObject::~GameObject()
 {
 }
 
-void GameObject::SetPosition(Vector3D pos)
+void GameObject::setPosition(float x, float y, float z)
 {
-    Matrix4x4 temp;
-    temp.setTranslation(pos);
-    transform *= temp;
-    this->position = pos;
+    this->localPosition = Vector3D(x, y, z);
 }
 
-void GameObject::SetScale(Vector3D scale)
+void GameObject::setPosition(Vector3D pos)
 {
-    Matrix4x4 temp;
-    temp.setScale(scale);
-    transform *= temp;
-    this->scale = scale;
+    this->localPosition = pos;
 }
 
-void GameObject::setRotationX(float x)
+Vector3D GameObject::getLocalPosition()
 {
-    Matrix4x4 temp;
-    temp.setRotationZ(x);
-    transform *= temp;
-    rotation.m_x = x;
+    return this->localPosition;
 }
 
-void GameObject::setRotationY(float y)
+void GameObject::setScale(float x, float y, float z)
 {
-    Matrix4x4 temp;
-    temp.setRotationY(y);
-    transform *= temp;
-    rotation.m_y = y;
+    this->localScale = Vector3D(x, y, z);
 }
 
-void GameObject::setRotationZ(float z)
+void GameObject::setScale(Vector3D scale)
 {
-    Matrix4x4 temp;
-    temp.setRotationZ(z);
-    transform *= temp;
-    rotation.m_y = z;
+    this->localScale = scale;
 }
 
-void GameObject::setIdentity()
+void GameObject::setRotation(float x, float y, float z)
 {
-    transform.setIdentity();
+    this->localRotation = Vector3D(x, y, z);
 }
 
+void GameObject::setRotation(Vector3D rot)
+{
+    this->localRotation = rot;
+}
 
+Vector3D GameObject::getLocalRotation()
+{
+    return this->localRotation;
+}
+
+Vector3D GameObject::getLocalScale()
+{
+    return this->localScale;
+}
+
+string GameObject::getName()
+{
+    return this->name;
+}

@@ -1,27 +1,56 @@
 #pragma once
+#include <string>
 #include "Vector3D.h"
 #include "Matrix4x4.h"
+
+using namespace std;
+
+class VertexShader;
+class PixelShader;
 
 class GameObject
 {
 
 public:
-    GameObject();
+    GameObject(string name);
     ~GameObject();
 
-    void SetPosition(Vector3D pos);
-    void SetScale(Vector3D scale);
-    void setRotationX(float x);
-    void setRotationY(float y);
-    void setRotationZ(float z);
-    void setIdentity();
+    // Abstract Methods
+    //virtual void update(float deltaTime) = 0;
+    //virtual void draw(int width, int height, VertexShader* vertexShader, PixelShader* pixelShader) = 0;
 
-public:
-    Vector3D position;
-    Vector3D scale;
-    Vector3D rotation;
+    void setPosition(float x, float y, float z);
+    void setPosition(Vector3D pos);
+    Vector3D getLocalPosition();
+
+    void setScale(float x, float y, float z);
+    void setScale(Vector3D scale);
+    Vector3D getLocalScale();
+
+    void setRotation(float x, float y, float z);
+    void setRotation(Vector3D rot);
+    Vector3D getLocalRotation();
+
+    string getName();
+
+    struct Vertex {
+        Vector3D position;
+        Vector3D color;
+        Vector3D color2;
+    };
+
+    _declspec(align(16)) //make CBData a size of 16-bytes.
+        struct CBData {
+        Matrix4x4 worldMatrix;
+        Matrix4x4 viewMatrix;
+        Matrix4x4 projMatrix;
+        float time;
+    };
 
 protected:
-    Matrix4x4 transform;
+    string name;
+    Vector3D localPosition;
+    Vector3D localScale;
+    Vector3D localRotation;
+    Matrix4x4 localMatrix;
 };
-

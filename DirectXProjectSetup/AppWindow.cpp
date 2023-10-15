@@ -1,5 +1,7 @@
 #include "AppWindow.h"
 #include <Windows.h>
+
+#include "InputSystem.h"
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 
@@ -25,55 +27,39 @@ AppWindow::AppWindow()
 {
 }
 
-void AppWindow::updateQuadPosition()
+void AppWindow::UpdateCamera()
 {
-    constant cc;
-    cc.m_time = ::GetTickCount();
 
-    /*
-    m_delta_pos += m_delta_time / 10.0f;
-    if (m_delta_pos > 1.0f)
-        m_delta_pos = 0;
-        */
 
     Matrix4x4 temp;
+    Matrix4x4 world_cam;
 
-    //m_delta_scale += m_delta_time / 0.55f;
-
-    //cc.m_world.setScale(Vector3D::lerp(Vector3D(0.5, 0.5, 0), Vector3D(1.0f, 1.0f, 0), (sin(m_delta_scale) + 1.0f) / 2.0f));
-
-    //temp.setTranslation(Vector3D::lerp(Vector3D(-1.5f, -1.5f, 0), Vector3D(1.5f,1.5f, 0), m_delta_pos));
-
-    //cc.m_world *= temp;
-
-    cc.m_world.setScale(Vector3D(0.5f, 0.5f, 0.5f));
+    world_cam.setIdentity();
 
     temp.setIdentity();
-    /*
-    temp.setRotationZ(m_delta_scale);
-    cc.m_world *= temp;
+    temp.setRotationX(m_rot_x);
+    world_cam *= temp;
 
     temp.setIdentity();
-   
-    temp.setRotationY(m_delta_scale);
-    cc.m_world *= temp;
-
-    temp.setIdentity();
-    temp.setRotationX(m_delta_scale);
-    cc.m_world *= temp;
-    */
-
-    cc.m_view.setIdentity();
-    cc.m_proj.setOrthoLH
-    (
-        (this->getClientWindowRect().right - this->getClientWindowRect().left) / 300.0f,
-        (this->getClientWindowRect().bottom - this->getClientWindowRect().top) / 300.0f,
-        -4.0f,
-        4.0f
-    );
+    temp.setRotationY(m_rot_y);
+    world_cam *= temp;
 
 
-    m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
+    Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.1f);
+
+    new_pos = new_pos + world_cam.getXDirection() * (m_rightward * 0.1f);
+
+    world_cam.setTranslation(new_pos);
+
+    m_world_cam = world_cam;
+
+
+    world_cam.inverse();
+
+    m_world_cam = world_cam;
+
+
+
 }
 
 
@@ -87,23 +73,27 @@ void AppWindow::onCreate()
     GraphicsEngine::get()->init();
     m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
+    InputSystem::initialize();
+    InputSystem::getInstance()->addListener(this);
+
+
     RECT rc = this->getClientWindowRect();
     m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 
-    Cube* cube = new Cube((this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-    cube->SetScale(Vector3D(0.2f, 0.2f, 0.2f));
-    cube->SetPosition(Vector3D(0, 0.3f, 0));
+    Cube* cube = new Cube("1", (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
+    cube->setScale(Vector3D(0.2f, 0.2f, 0.2f));
+    cube->setPosition(Vector3D(0, 0.3f, 0));
     cube->SetAnimationSpeed(5);
 
-    Cube* cube1 = new Cube((this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-    cube1->SetScale(Vector3D(0.5f, 0.5f, 0.5f));
-    cube1->SetPosition(Vector3D(0, -0.45f, 0));
+    Cube* cube1 = new Cube("2", (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
+    cube1->setScale(Vector3D(0.5f, 0.5f, 0.5f));
+    cube1->setPosition(Vector3D(0, -0.45f, 0));
     cube1->SetAnimationSpeed(10);
 
-    Cube* cube2 = new Cube((this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-    cube2->SetScale(Vector3D(0.35f, 0.35f, 0.35f));
-    cube2->SetPosition(Vector3D(0, 0, 0));
+    Cube* cube2 = new Cube("3", (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
+    cube2->setScale(Vector3D(0.35f, 0.35f, 0.35f));
+    cube2->setPosition(Vector3D(0, 0, 0));
     cube2->SetAnimationSpeed(3);
 
     cubeList.push_back(cube);
@@ -114,6 +104,8 @@ void AppWindow::onCreate()
 
 void AppWindow::onUpdate()
 {
+    InputSystem::getInstance()->update();
+
     Window::onUpdate();
     //CLEAR THE RENDER TARGET 
     GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
@@ -122,13 +114,14 @@ void AppWindow::onUpdate()
     RECT rc = this->getClientWindowRect();
     GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-    for (Cube* cube : cubeList)
-    {
-        cube->OnUpdate();
-    }
+
+    UpdateCamera();
+
+
 
     for (Cube* cube : cubeList)
     {
+        cube->OnUpdate();
         cube->Draw();
     }
 
@@ -147,9 +140,64 @@ void AppWindow::onDestroy()
     Window::onDestroy();
     m_vb->release();
     m_ib->release();
-    m_cb->release();
+    m_cb->release();    
     m_swap_chain->release();
     m_vs->release();
     m_ps->release();
     GraphicsEngine::get()->release();
+}
+
+void AppWindow::onKeyDown(int key)
+{
+    /*
+    //cout << "onkeydown:\n";
+    if (InputSystem::getInstance()->isKeyDown('W'))
+    {
+        cout << "W pressed\n";
+    }
+    */
+}
+
+void AppWindow::onKeyUp(int key)
+{
+    /*
+    cout << "onkeyup:\n";
+    if (InputSystem::getInstance()->isKeyUp('W'))
+    {
+        cout << "W released\n";
+    }
+    */
+}
+
+void AppWindow::onMouseMove(const Point deltaPos)
+{
+    //cout << " mouse moved: " << deltaPos.getX() << ", " << deltaPos.getY() << "\n";
+    int width = (this->getClientWindowRect().right - this->getClientWindowRect().left);
+    int height = (this->getClientWindowRect().bottom - this->getClientWindowRect().top);
+
+
+
+    m_rot_x += (deltaPos.getY() - (height / 2.0f)) * m_delta_time * 0.1f;
+    m_rot_y += (deltaPos.getX() - (width / 2.0f)) * m_delta_time * 0.1f;
+
+
+
+    //InputSystem::getInstance()->setCursorPosition(Point((int)(width / 2.0f), (int)(height / 2.0f)));
+
+}
+
+void AppWindow::onLeftMouseDown(const Point deltaPos)
+{
+}
+
+void AppWindow::onLeftMouseUp(const Point deltaPos)
+{
+}
+
+void AppWindow::onRightMouseDown(const Point deltaPos)
+{
+}
+
+void AppWindow::onRightMouseUp(const Point deltaPos)
+{
 }

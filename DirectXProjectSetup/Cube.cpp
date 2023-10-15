@@ -21,13 +21,12 @@ struct vertex
     Vector3D color1;
 };
 
-Cube::Cube(float screenW, float screenH)
+Cube::Cube(string name, float screenW, float screenH): GameObject(name)
 {
 
     screenWidth = screenW;
     screenHeight = screenH;
 
-    cout << "Cube Init" << endl;
     vertex vertex_list[] =
     {
         //X - Y - Z
@@ -100,10 +99,7 @@ Cube::Cube(float screenW, float screenH)
     m_cb = GraphicsEngine::get()->createConstantBuffer();
     m_cb->load(&cc, sizeof(constant));
 
-    SetPosition(Vector3D(0, 0, 0));
-    SetScale(Vector3D(0.2f, 0.2f, 0.2f));
-
-    cout << "Gameobject Pos: " << position.m_x << ", " << position.m_y << ", " << position.m_z << endl;
+ 
 }
 
 Cube::~Cube()
@@ -112,19 +108,28 @@ Cube::~Cube()
 
 void Cube::OnUpdate()
 {
-    rotation.m_y += 0.01f * animationSpeed;
+    localRotation.m_y += 0.01f * animationSpeed;
+    localRotation.m_x += 0.01f * animationSpeed;
 
     constant cc;
     cc.m_time = EngineTime::getDeltaTime();
-  
-    cc.m_world.setScale(scale);
-    cc.m_world.setTranslation(position);
 
-    Matrix4x4 temp;
-    temp.setIdentity();
-    temp.setRotationY(rotation.m_y);
-    cc.m_world *= temp;
+    cc.m_world.setIdentity();
+   
+    cc.m_world.setScale(this->getLocalScale());
+    
+    Matrix4x4 rotation;
+    Matrix4x4 rotY;
+    rotY.setIdentity();
+    rotY.setRotationY(localRotation.m_y);
+    cc.m_world *= rotY;
 
+    Matrix4x4 rotX;
+    rotX.setIdentity();
+    rotX.setRotationX(localRotation.m_x);
+    cc.m_world *= rotX;
+
+    cc.m_world.setTranslation(this->getLocalPosition());
 
     cc.m_view.setIdentity();
     cc.m_proj.setOrthoLH
@@ -141,6 +146,9 @@ void Cube::OnUpdate()
 
 void Cube::Draw()
 {
+    constant cc;
+    cc.m_time = EngineTime::getDeltaTime();
+
     GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
     GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
 
@@ -157,7 +165,9 @@ void Cube::Draw()
 
     // FINALLY DRAW THE TRIANGLE
     GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
-   
+
+    m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
+
 }
 
 void Cube::SetAnimationSpeed(float speed)

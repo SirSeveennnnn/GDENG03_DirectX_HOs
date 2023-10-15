@@ -10,6 +10,7 @@ public:
     bool load(void* list_indices, UINT size_list);
     UINT getSizeIndexList();
     bool release();
+    UINT getIndexSize();
     ~IndexBuffer();
 private:
     UINT m_size_list;
