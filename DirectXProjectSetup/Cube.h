@@ -16,7 +16,7 @@ public:
     Cube(string name, float screenW, float screenH);
     ~Cube();
 
-    void OnUpdate();
+    void OnUpdate(Matrix4x4 viewMatrix, float animMultiplier);
     void Draw();
     void SetAnimationSpeed(float speed);
 
@@ -34,4 +34,5 @@ private:
     float screenWidth = 0;
 
     float deltaScale;
+
 };

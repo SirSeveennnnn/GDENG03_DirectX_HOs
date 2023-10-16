@@ -106,10 +106,10 @@ Cube::~Cube()
 {
 }
 
-void Cube::OnUpdate()
+void Cube::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
 {
-    localRotation.m_y += 0.01f * animationSpeed;
-    localRotation.m_x += 0.01f * animationSpeed;
+    localRotation.m_y += 0.01f * animationSpeed * animMultiplier;
+    localRotation.m_x += 0.01f * animationSpeed * animMultiplier;
 
     constant cc;
     cc.m_time = EngineTime::getDeltaTime();
@@ -117,8 +117,7 @@ void Cube::OnUpdate()
     cc.m_world.setIdentity();
    
     cc.m_world.setScale(this->getLocalScale());
-    
-    Matrix4x4 rotation;
+ 
     Matrix4x4 rotY;
     rotY.setIdentity();
     rotY.setRotationY(localRotation.m_y);
@@ -131,14 +130,11 @@ void Cube::OnUpdate()
 
     cc.m_world.setTranslation(this->getLocalPosition());
 
-    cc.m_view.setIdentity();
-    cc.m_proj.setOrthoLH
-    (
-        (screenWidth) / 300.0f,
-        (screenHeight) / 300.0f,
-        -4.0f,
-        4.0f
-    );
+
+ 
+    cc.m_view = viewMatrix;
+
+    cc.m_proj.setPerspectiveFovLH(1.57f, ((float)screenWidth / (float)screenHeight), 0.1f, 100.0f);
 
 
     m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);

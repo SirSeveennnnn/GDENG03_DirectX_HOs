@@ -2,6 +2,7 @@
 #include <Windows.h>
 
 #include "InputSystem.h"
+#include "MathUtils.h"
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 
@@ -29,36 +30,27 @@ AppWindow::AppWindow()
 
 void AppWindow::UpdateCamera()
 {
+    m_world_cam.setIdentity();
 
 
-    Matrix4x4 temp;
-    Matrix4x4 world_cam;
+    Matrix4x4 rotX;
+    rotX.setIdentity();
+    rotX.setRotationX(cameraRotation.m_x);
+    m_world_cam *= rotX;
 
-    world_cam.setIdentity();
+    Matrix4x4 rotY;
+    rotY.setIdentity();
+    rotY.setRotationY(cameraRotation.m_y);
+    m_world_cam *= rotY;
 
-    temp.setIdentity();
-    temp.setRotationX(m_rot_x);
-    world_cam *= temp;
-
-    temp.setIdentity();
-    temp.setRotationY(m_rot_y);
-    world_cam *= temp;
-
-
-    Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.1f);
-
-    new_pos = new_pos + world_cam.getXDirection() * (m_rightward * 0.1f);
-
-    world_cam.setTranslation(new_pos);
-
-    m_world_cam = world_cam;
+    cameraPosition = cameraPosition + m_world_cam.getZDirection() * (m_forward * 0.1f);
+    cameraPosition = cameraPosition + m_world_cam.getXDirection() * (m_rightward * 0.1f);
 
 
-    world_cam.inverse();
+    m_world_cam.setTranslation(cameraPosition);
+   
 
-    m_world_cam = world_cam;
-
-
+    m_world_cam.inverse();
 
 }
 
@@ -80,25 +72,25 @@ void AppWindow::onCreate()
     RECT rc = this->getClientWindowRect();
     m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
+    for (int i = 0; i < 10; i++) {
+        float x = MathUtils::randomFloat(-1, 1);
+        float y = MathUtils::randomFloat(-1, 1);
+        float z = MathUtils::randomFloat(-1, 1);
 
-    Cube* cube = new Cube("1", (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-    cube->setScale(Vector3D(0.2f, 0.2f, 0.2f));
-    cube->setPosition(Vector3D(0, 0.3f, 0));
-    cube->SetAnimationSpeed(5);
+        Cube* cube = new Cube(std::to_string(i), (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
+        cube->SetAnimationSpeed(MathUtils::randomFloat(5, 10));
+        cube->setPosition(Vector3D(x, y, z));
+        cube->setScale(Vector3D(0.25, 0.25, 0.25));
+        this->cubeList.push_back(cube);
+    }
 
-    Cube* cube1 = new Cube("2", (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-    cube1->setScale(Vector3D(0.5f, 0.5f, 0.5f));
-    cube1->setPosition(Vector3D(0, -0.45f, 0));
-    cube1->SetAnimationSpeed(10);
+   
 
-    Cube* cube2 = new Cube("3", (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-    cube2->setScale(Vector3D(0.35f, 0.35f, 0.35f));
-    cube2->setPosition(Vector3D(0, 0, 0));
-    cube2->SetAnimationSpeed(3);
 
-    cubeList.push_back(cube);
-    cubeList.push_back(cube1);
-    cubeList.push_back(cube2);
+    m_world_cam.setIdentity();
+    cameraPosition.m_x = 0;
+    cameraPosition.m_y = 0;
+    cameraPosition.m_z = -2;
 
 }
 
@@ -121,7 +113,7 @@ void AppWindow::onUpdate()
 
     for (Cube* cube : cubeList)
     {
-        cube->OnUpdate();
+        cube->OnUpdate(m_world_cam, animMultiplier);
         cube->Draw();
     }
 
@@ -149,29 +141,41 @@ void AppWindow::onDestroy()
 
 void AppWindow::onKeyDown(int key)
 {
-    /*
+    
     //cout << "onkeydown:\n";
-    if (InputSystem::getInstance()->isKeyDown('W'))
-    {
-        cout << "W pressed\n";
-    }
-    */
+    if (key == 'W')
+	{
+        m_forward = 1.0f;
+        animMultiplier = 1.0f;
+	}
+	else if (key == 'S')
+	{
+        animMultiplier = -1.0f;
+        m_forward = -1.0f;
+	}
+	else if (key == 'A')
+	{
+        m_rightward = -1.0f;
+	}
+	else if (key == 'D')
+	{
+	    m_rightward = 1.0f;
+	}
+
 }
+
 
 void AppWindow::onKeyUp(int key)
 {
-    /*
-    cout << "onkeyup:\n";
-    if (InputSystem::getInstance()->isKeyUp('W'))
-    {
-        cout << "W released\n";
-    }
-    */
+    m_forward = 0.0f;
+    m_rightward = 0.0f;
+    animMultiplier = 0.0f;
 }
 
 void AppWindow::onMouseMove(const Point deltaPos)
 {
     //cout << " mouse moved: " << deltaPos.getX() << ", " << deltaPos.getY() << "\n";
+    //cout << " camera rot: " << cameraRotation.m_x << ", " << cameraRotation.m_y << "\n";
     int width = (this->getClientWindowRect().right - this->getClientWindowRect().left);
     int height = (this->getClientWindowRect().bottom - this->getClientWindowRect().top);
 
@@ -180,9 +184,8 @@ void AppWindow::onMouseMove(const Point deltaPos)
     m_rot_x += (deltaPos.getY() - (height / 2.0f)) * m_delta_time * 0.1f;
     m_rot_y += (deltaPos.getX() - (width / 2.0f)) * m_delta_time * 0.1f;
 
-
-
-    //InputSystem::getInstance()->setCursorPosition(Point((int)(width / 2.0f), (int)(height / 2.0f)));
+    cameraRotation.m_x += deltaPos.getY() * 0.5f * m_delta_time;
+    cameraRotation.m_y += deltaPos.getX() * 0.5f * m_delta_time;
 
 }
 
