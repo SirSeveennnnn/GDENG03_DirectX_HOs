@@ -11,8 +11,10 @@ public:
     void update(DeviceContext* context, void* buffer);
     bool release();
     ~ConstantBuffer();
-private:
+
     ID3D11Buffer* m_buffer;
+private:
+ 
 private:
     friend class DeviceContext;
 };

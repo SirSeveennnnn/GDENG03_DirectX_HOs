@@ -30,17 +30,17 @@ Cube::Cube(string name, float screenW, float screenH): GameObject(name)
     vertex vertex_list[] =
     {
         //X - Y - Z
-        //FRONT FACE
-        {Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
-        {Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
-        { Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
-        { Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
+        // FRONT FACE
+        { Vector3D(-0.5f, -0.5f, -0.5f),        Vector3D(1,0,0),    Vector3D(0.2f,0.0f,0.0f) },
+        { Vector3D(-0.5f, 0.5f, -0.5f),            Vector3D(1,1,0),    Vector3D(0.2f,0.2f,0.0f) },
+        { Vector3D(0.5f, 0.5f, -0.5f),            Vector3D(1,1,0),    Vector3D(0.2f,0.2f,0.0f) },
+        { Vector3D(0.5f, -0.5f, -0.5f),            Vector3D(1,0,0),    Vector3D(0.2f,0.0f,0.0f) },
 
-        //BACK FACE
-        { Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
-        { Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
-        { Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
-        { Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) }
+// BACK FACE
+        { Vector3D(0.5f, -0.5f, 0.5f),            Vector3D(0,1,0),    Vector3D(0.0f,0.2f,0.0f) },
+        { Vector3D(0.5f, 0.5f, 0.5f),            Vector3D(0,1,1),    Vector3D(0.0f,0.2f,0.2f) },
+        { Vector3D(-0.5f, 0.5f, 0.5f),            Vector3D(0,1,1),    Vector3D(0.0f,0.2f,0.2f) },
+        { Vector3D(-0.5f, -0.5f, 0.5f),            Vector3D(0,1,0),    Vector3D(0.0f,0.2f,0.0f) },
 
     };
 
@@ -108,16 +108,64 @@ Cube::~Cube()
 
 void Cube::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
 {
-    localRotation.m_y += 0.01f * animationSpeed * animMultiplier;
-    localRotation.m_x += 0.01f * animationSpeed * animMultiplier;
+    //Question 2 && Question 4
+    //localRotation.m_y += 0.01f * animationSpeed;
+    //localRotation.m_x += 0.01f * animationSpeed;
+    //localRotation.m_z += 0.01f * animationSpeed;
+
+    //Question 3
+    //lerp
+    //(a * (1.0 - f)) + (b * f);
+   /*
+    
+    if (lerpValue < 1 && !dir)
+    {
+        lerpValue += 0.01f;
+    }
+    else if (lerpValue > 0 && dir)
+    {
+        lerpValue -= 0.01f;
+    }
+
+    if (lerpValue > 1)
+    {
+        dir = true;
+    }
+    else if (lerpValue < 0)
+    {
+        dir = false;
+    }
+
+    Vector3D currentPos;
+    currentPos.m_x = (startPos.m_x * (1.0f - lerpValue) + (endPos.m_x * lerpValue));
+    currentPos.m_y = (startPos.m_y * (1.0f - lerpValue) + (endPos.m_y * lerpValue));
+    currentPos.m_z = (startPos.m_z * (1.0f - lerpValue) + (endPos.m_z * lerpValue));
+
+    Vector3D currentScale;
+    currentScale.m_x = (startScale.m_x * (1.0f - lerpValue) + (endScale.m_x * lerpValue));
+    currentScale.m_y = (startScale.m_y * (1.0f - lerpValue) + (endScale.m_y * lerpValue));
+    currentScale.m_z = (startScale.m_z * (1.0f - lerpValue) + (endScale.m_z * lerpValue));
+
+    cc.m_world.setScale(currentScale);
+    cc.m_world.setTranslation(currentPos);
+    */
+    localRotation.m_y += 0.01f * animationSpeed;
+    localRotation.m_x += 0.01f * animationSpeed;
+    localRotation.m_z += 0.01f * animationSpeed;
 
     constant cc;
-    cc.m_time = EngineTime::getDeltaTime();
+    cc.m_time = 0;
 
     cc.m_world.setIdentity();
-   
+
     cc.m_world.setScale(this->getLocalScale());
- 
+    
+
+    Matrix4x4 rotZ;
+    rotZ.setIdentity();
+    rotZ.setRotationZ(localRotation.m_z);
+    cc.m_world *= rotZ;
+
     Matrix4x4 rotY;
     rotY.setIdentity();
     rotY.setRotationY(localRotation.m_y);
@@ -128,8 +176,10 @@ void Cube::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
     rotX.setRotationX(localRotation.m_x);
     cc.m_world *= rotX;
 
-    cc.m_world.setTranslation(this->getLocalPosition());
+   
 
+    cc.m_world.setTranslation(this->getLocalPosition());
+   
 
  
     cc.m_view = viewMatrix;
@@ -142,9 +192,7 @@ void Cube::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
 
 void Cube::Draw()
 {
-    constant cc;
-    cc.m_time = EngineTime::getDeltaTime();
-
+  
     GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_vs, m_cb);
     GraphicsEngine::get()->getImmediateDeviceContext()->setConstantBuffer(m_ps, m_cb);
 
@@ -160,9 +208,9 @@ void Cube::Draw()
 
 
     // FINALLY DRAW THE TRIANGLE
-    GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
+    GraphicsEngine::get()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getIndexSize(), 0, 0);
 
-    m_cb->update(GraphicsEngine::get()->getImmediateDeviceContext(), &cc);
+ 
 
 }
 

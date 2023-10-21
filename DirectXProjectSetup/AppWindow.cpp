@@ -65,6 +65,7 @@ void AppWindow::onCreate()
     GraphicsEngine::get()->init();
     m_swap_chain = GraphicsEngine::get()->createSwapChain();
 
+    EngineTime::initialize();
     InputSystem::initialize();
     InputSystem::getInstance()->addListener(this);
 
@@ -72,10 +73,12 @@ void AppWindow::onCreate()
     RECT rc = this->getClientWindowRect();
     m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
-    for (int i = 0; i < 10; i++) {
-        float x = MathUtils::randomFloat(-1, 1);
-        float y = MathUtils::randomFloat(-1, 1);
-        float z = MathUtils::randomFloat(-1, 1);
+
+    
+    for (int i = 0; i < 50; i++) {
+        float x = MathUtils::randomFloat(-0.5f, 0.5f);
+        float y = MathUtils::randomFloat(-0.5f, 0.5f);
+        float z = MathUtils::randomFloat(-0.5f, 0.5f);
 
         Cube* cube = new Cube(std::to_string(i), (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
         cube->SetAnimationSpeed(MathUtils::randomFloat(5, 10));
@@ -83,8 +86,7 @@ void AppWindow::onCreate()
         cube->setScale(Vector3D(0.25, 0.25, 0.25));
         this->cubeList.push_back(cube);
     }
-
-   
+    
 
 
     m_world_cam.setIdentity();
@@ -108,7 +110,6 @@ void AppWindow::onUpdate()
 
 
     UpdateCamera();
-
 
 
     for (Cube* cube : cubeList)
@@ -184,17 +185,22 @@ void AppWindow::onMouseMove(const Point deltaPos)
     m_rot_x += (deltaPos.getY() - (height / 2.0f)) * m_delta_time * 0.1f;
     m_rot_y += (deltaPos.getX() - (width / 2.0f)) * m_delta_time * 0.1f;
 
-    cameraRotation.m_x += deltaPos.getY() * 0.5f * m_delta_time;
-    cameraRotation.m_y += deltaPos.getX() * 0.5f * m_delta_time;
+    if (rotateCam)
+    {
+        cameraRotation.m_x += deltaPos.getY() * 0.5f * m_delta_time;
+        cameraRotation.m_y += deltaPos.getX() * 0.5f * m_delta_time;
+    }
 
 }
 
 void AppWindow::onLeftMouseDown(const Point deltaPos)
 {
+    rotateCam = true;
 }
 
 void AppWindow::onLeftMouseUp(const Point deltaPos)
 {
+    rotateCam = false;
 }
 
 void AppWindow::onRightMouseDown(const Point deltaPos)

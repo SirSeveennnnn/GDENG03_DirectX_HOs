@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "ConstantBuffer.h"
 #include "GameObject.h"
 #include "VertexBuffer.h"
@@ -34,5 +36,15 @@ private:
     float screenWidth = 0;
 
     float deltaScale;
+
+    Vector3D startPos = Vector3D(-1, -1, 0);
+    Vector3D endPos = Vector3D(1, 1, 0);
+
+    Vector3D startScale = Vector3D(1, 1, 1);
+    Vector3D endScale = Vector3D(5, 0.001f, 5);
+
+
+    float lerpValue = 0;
+    bool dir = false;
 
 };

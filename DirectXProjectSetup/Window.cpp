@@ -111,7 +111,6 @@ bool Window::broadcast()
 
 	Sleep(1);
 
-
     EngineTime::LogFrameStart();
 	return true;
 }

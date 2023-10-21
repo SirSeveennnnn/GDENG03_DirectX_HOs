@@ -63,9 +63,11 @@ private:
     float m_forward = 0.0f;
     float m_rightward = 0.0f;
     Matrix4x4 m_world_cam;
+
     Vector3D cameraRotation;
     Vector3D cameraPosition;
 
     float animMultiplier;
+    bool rotateCam = false;
 };
 

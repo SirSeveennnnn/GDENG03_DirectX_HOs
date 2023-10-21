@@ -1,53 +1,48 @@
 #include "IndexBuffer.h"
 #include "GraphicsEngine.h"
+#include <iostream>
 
-
-IndexBuffer::IndexBuffer() : m_buffer(0)
+IndexBuffer::IndexBuffer()
 {
 }
 
-bool IndexBuffer::load(void* list_indices, UINT size_list)
+IndexBuffer::~IndexBuffer()
 {
-    if (m_buffer)m_buffer->Release();
-
-    D3D11_BUFFER_DESC buff_desc = {};
-    buff_desc.Usage = D3D11_USAGE_DEFAULT;
-    buff_desc.ByteWidth = 4 * size_list;
-    buff_desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    buff_desc.CPUAccessFlags = 0;
-    buff_desc.MiscFlags = 0;
-
-    D3D11_SUBRESOURCE_DATA init_data = {};
-    init_data.pSysMem = list_indices;
-
-    m_size_list = size_list;
-
-    if (FAILED(GraphicsEngine::get()->m_d3d_device->CreateBuffer(&buff_desc, &init_data, &m_buffer)))
-    {
-        return false;
-    }
-
-    return true;
 }
 
-UINT IndexBuffer::getSizeIndexList()
+void IndexBuffer::load(void* indexList, UINT listSize)
 {
-    return this->m_size_list;
+    if (this->buffer) this->buffer->Release();
+
+    D3D11_BUFFER_DESC bufferDesc = {};
+    bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+    bufferDesc.ByteWidth = 4 * listSize;
+    bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bufferDesc.CPUAccessFlags = 0;
+    bufferDesc.MiscFlags = 0;
+
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = indexList;
+    this->listSize = listSize;
+
+    ID3D11Device* directXDevice = GraphicsEngine::get()->m_d3d_device;
+    HRESULT bufferResult = directXDevice->CreateBuffer(&bufferDesc, &initData, &this->buffer);
+
+   
 }
 
-bool IndexBuffer::release()
+void IndexBuffer::release()
 {
-    m_buffer->Release();
+    this->buffer->Release();
     delete this;
-    return true;
+}
+
+ID3D11Buffer* IndexBuffer::getBuffer()
+{
+    return this->buffer;
 }
 
 UINT IndexBuffer::getIndexSize()
 {
-    return this->m_size_list;
-}
-
-
-IndexBuffer::~IndexBuffer()
-{
+    return this->listSize;
 }
