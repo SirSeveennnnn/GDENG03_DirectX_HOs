@@ -20,7 +20,9 @@ public:
     ~GraphicsEngine();
 public:
     SwapChain* createSwapChain();
+    ID3D11DeviceContext* getD3D11DeviceContext();
     DeviceContext* getImmediateDeviceContext();
+    ID3D11Device* getDevice();
     VertexBuffer* createVertexBuffer();
     IndexBuffer* createIndexBuffer();
     ConstantBuffer* createConstantBuffer();

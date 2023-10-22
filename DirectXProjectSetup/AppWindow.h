@@ -11,6 +11,7 @@
 #include "Cube.h"
 #include <vector>
 
+#include "imgui.h"
 #include "InputListener.h"
 
 class AppWindow : public Window, public InputListener
@@ -67,7 +68,12 @@ private:
     Vector3D cameraRotation;
     Vector3D cameraPosition;
 
-    float animMultiplier;
+    float animMultiplier = 0;
     bool rotateCam = false;
+
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    bool animation = false;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 };
 

@@ -149,9 +149,9 @@ void Cube::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
     cc.m_world.setScale(currentScale);
     cc.m_world.setTranslation(currentPos);
     */
-    localRotation.m_y += 0.01f * animationSpeed;
-    localRotation.m_x += 0.01f * animationSpeed;
-    localRotation.m_z += 0.01f * animationSpeed;
+    localRotation.m_y += 0.01f * animationSpeed * animMultiplier;
+    localRotation.m_x += 0.01f * animationSpeed * animMultiplier;
+    localRotation.m_z += 0.01f * animationSpeed * animMultiplier;
 
     constant cc;
     cc.m_time = 0;

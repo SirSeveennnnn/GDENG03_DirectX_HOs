@@ -6,6 +6,11 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
+
+
 struct vertex
 {
     Vector3D position;
@@ -94,19 +99,71 @@ void AppWindow::onCreate()
     cameraPosition.m_y = 0;
     cameraPosition.m_z = -2;
 
+    //IMGUI
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    //io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+
+    // Setup Platform/Renderer backends
+    ImGui_ImplWin32_Init(this->m_hwnd);
+    ImGui_ImplDX11_Init(GraphicsEngine::get()->getDevice(), GraphicsEngine::get()->getD3D11DeviceContext());
+ 
 }
 
 void AppWindow::onUpdate()
 {
+    ImGui_ImplDX11_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
+
+    if (show_demo_window)
+    {
+        ImGui::ShowDemoWindow();
+    }
+   
+
+    static float f = 0.0f;
+    static int counter = 0;
+
+    ImGuiWindowFlags flag = 64;
+    ImGui::Begin("Scene Settings", 0, flag);
+    ImGui::Checkbox("Demo Window", &show_demo_window);
+
+    ImGui::ColorEdit3("clear color", (float*)&clear_color); 
+
+    if (animation)
+    {
+        if (ImGui::Button("Pause Animation"))
+        {
+            animation = !animation;
+            animMultiplier = 0;
+        }
+    }
+    else
+    {
+        if (ImGui::Button("Start Animation"))
+        {
+            animation = !animation;
+            animMultiplier = 1;
+        }
+    }
+
+    ImGui::End();
+
+  
+
     InputSystem::getInstance()->update();
 
     Window::onUpdate();
     //CLEAR THE RENDER TARGET 
-    GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
-        0, 0.3f, 0.4f, 1);
+    GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,clear_color.x, clear_color.y, clear_color.z, 1);
     //SET VIEWPORT OF RENDER TARGET IN WHICH WE HAVE TO DRAW
     RECT rc = this->getClientWindowRect();
     GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+
 
 
     UpdateCamera();
@@ -118,7 +175,9 @@ void AppWindow::onUpdate()
         cube->Draw();
     }
 
-
+    ImGui::Render();
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+ 
   
     m_swap_chain->present(true);
 
@@ -130,6 +189,10 @@ void AppWindow::onUpdate()
 
 void AppWindow::onDestroy()
 {
+    ImGui_ImplDX11_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
+
     Window::onDestroy();
     m_vb->release();
     m_ib->release();
@@ -147,11 +210,11 @@ void AppWindow::onKeyDown(int key)
     if (key == 'W')
 	{
         m_forward = 1.0f;
-        animMultiplier = 1.0f;
+        //animMultiplier = 1.0f;
 	}
 	else if (key == 'S')
 	{
-        animMultiplier = -1.0f;
+        //animMultiplier = -1.0f;
         m_forward = -1.0f;
 	}
 	else if (key == 'A')
@@ -195,18 +258,20 @@ void AppWindow::onMouseMove(const Point deltaPos)
 
 void AppWindow::onLeftMouseDown(const Point deltaPos)
 {
-    rotateCam = true;
+   
 }
 
 void AppWindow::onLeftMouseUp(const Point deltaPos)
 {
-    rotateCam = false;
+   
 }
 
 void AppWindow::onRightMouseDown(const Point deltaPos)
 {
+    rotateCam = true;
 }
 
 void AppWindow::onRightMouseUp(const Point deltaPos)
 {
+    rotateCam = false;
 }
