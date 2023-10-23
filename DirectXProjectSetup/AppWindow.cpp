@@ -5,6 +5,7 @@
 #include "MathUtils.h"
 #include "Vector3D.h"
 #include "Matrix4x4.h"
+#include "UIManager.h"
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -99,22 +100,13 @@ void AppWindow::onCreate()
     cameraPosition.m_y = 0;
     cameraPosition.m_z = -2;
 
-    //IMGUI
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
-
-    // Setup Platform/Renderer backends
-    ImGui_ImplWin32_Init(this->m_hwnd);
-    ImGui_ImplDX11_Init(GraphicsEngine::get()->getDevice(), GraphicsEngine::get()->getD3D11DeviceContext());
+    UIManager::initialize(this->m_hwnd);
  
 }
 
 void AppWindow::onUpdate()
 {
+    /*
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
@@ -152,8 +144,8 @@ void AppWindow::onUpdate()
     }
 
     ImGui::End();
-
-  
+    */
+    
 
     InputSystem::getInstance()->update();
 
@@ -164,10 +156,9 @@ void AppWindow::onUpdate()
     RECT rc = this->getClientWindowRect();
     GraphicsEngine::get()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-
-
     UpdateCamera();
 
+    UIManager::getInstance()->drawAllUI();
 
     for (Cube* cube : cubeList)
     {
@@ -175,9 +166,11 @@ void AppWindow::onUpdate()
         cube->Draw();
     }
 
-    ImGui::Render();
-    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
- 
+   
+
+    //ImGui::Render();
+    //ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    UIManager::getInstance()->renderUI();
   
     m_swap_chain->present(true);
 

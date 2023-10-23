@@ -52,6 +52,15 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{959115e9-6977-4db3-a5ab-f666a9cbc458}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{9fc50dd0-cab4-4044-a9f3-923e6ebc9f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI\UIManager">
+      <UniqueIdentifier>{e1525110-4100-44cb-a972-4f640d8eec00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI\UIScreens">
+      <UniqueIdentifier>{319bb16c-a990-482a-ab1b-6bc51f2d0c25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,6 +154,15 @@
     <ClCompile Include="..\..\imgui\backends\imgui_impl_win32.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="AUIScreen.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\UI\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_MenuToolBar.cpp">
+      <Filter>Engine\UI\UIScreens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -237,6 +255,15 @@
     </ClInclude>
     <ClInclude Include="..\..\imgui\backends\imgui_impl_win32.h">
       <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="AUIScreen.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\UI\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_MenuToolBar.h">
+      <Filter>Engine\UI\UIScreens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
