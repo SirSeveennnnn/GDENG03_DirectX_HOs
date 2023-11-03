@@ -52,6 +52,14 @@ Vector3D GameObject::getLocalRotation()
     return this->localRotation;
 }
 
+void GameObject::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
+{
+}
+
+void GameObject::Draw()
+{
+}
+
 Vector3D GameObject::getLocalScale()
 {
     return this->localScale;

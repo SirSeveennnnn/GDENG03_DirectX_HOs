@@ -1,6 +1,10 @@
 #include "UIManager.h"
 #include "GraphicsEngine.h"
 
+#include "UI_MenuToolBar.h"
+#include "UI_SceneOutliner.h"
+#include  "UI_InspectorWindow.h"
+#include "UI_EngineProfiler.h"
 
 UIManager* UIManager::sharedInstance = nullptr;
 
@@ -28,6 +32,15 @@ void UIManager::initialize(HWND windowHandle)
 
     UI_MenuToolBar* toolbar = new UI_MenuToolBar("Toolbar");
     sharedInstance->UIList.push_back(toolbar);
+
+    UI_SceneOutliner* sceneOutliner = new UI_SceneOutliner("Scene Outliner");
+    sharedInstance->UIList.push_back(sceneOutliner);
+
+    UI_InspectorWindow* inspector = new UI_InspectorWindow("Inspector");
+    sharedInstance->UIList.push_back(inspector);
+
+    UI_EngineProfiler* engineProfiler = new UI_EngineProfiler("Scene Outliner");
+    sharedInstance->UIList.push_back(engineProfiler);
    
 }
 

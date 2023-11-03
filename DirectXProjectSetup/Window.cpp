@@ -95,6 +95,8 @@ bool Window::init()
 
 
     EngineTime::initialize();
+    EngineTime::logFrameStart();
+    EngineTime::logFrameEnd();
 
 
 	return true;
@@ -102,7 +104,7 @@ bool Window::init()
 
 bool Window::broadcast()
 {
-    EngineTime::LogFrameStart();
+    EngineTime::logFrameStart();
 	MSG msg;
 
 
@@ -116,7 +118,7 @@ bool Window::broadcast()
 
 	Sleep(1);
 
-    EngineTime::LogFrameStart();
+    EngineTime::logFrameEnd();
 	return true;
 }
 

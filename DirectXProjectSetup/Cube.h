@@ -18,8 +18,8 @@ public:
     Cube(string name, float screenW, float screenH);
     ~Cube();
 
-    void OnUpdate(Matrix4x4 viewMatrix, float animMultiplier);
-    void Draw();
+    void OnUpdate(Matrix4x4 viewMatrix, float animMultiplier) override;
+    void Draw() override;
     void SetAnimationSpeed(float speed);
 
 private:

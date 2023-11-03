@@ -6,6 +6,7 @@
 #include "Vector3D.h"
 #include "Matrix4x4.h"
 #include "UIManager.h"
+#include "GameObjectManager.h"
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -80,20 +81,8 @@ void AppWindow::onCreate()
     m_swap_chain->init(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
 
-    
-    for (int i = 0; i < 50; i++) {
-        float x = MathUtils::randomFloat(-0.5f, 0.5f);
-        float y = MathUtils::randomFloat(-0.5f, 0.5f);
-        float z = MathUtils::randomFloat(-0.5f, 0.5f);
-
-        Cube* cube = new Cube(std::to_string(i), (this->getClientWindowRect().right - this->getClientWindowRect().left), (this->getClientWindowRect().bottom - this->getClientWindowRect().top));
-        cube->SetAnimationSpeed(MathUtils::randomFloat(5, 10));
-        cube->setPosition(Vector3D(x, y, z));
-        cube->setScale(Vector3D(0.25, 0.25, 0.25));
-        this->cubeList.push_back(cube);
-    }
-    
-
+    GameObjectManager::Initialize((this->getClientWindowRect().left - this->getClientWindowRect().right), (this->getClientWindowRect().top - this->getClientWindowRect().bottom));
+    //GameObjectManager::getInstance()->CreateObject(TypeCube);
 
     m_world_cam.setIdentity();
     cameraPosition.m_x = 0;
@@ -160,13 +149,8 @@ void AppWindow::onUpdate()
 
     UIManager::getInstance()->drawAllUI();
 
-    for (Cube* cube : cubeList)
-    {
-        cube->OnUpdate(m_world_cam, animMultiplier);
-        cube->Draw();
-    }
-
-   
+    GameObjectManager::getInstance()->Update(m_world_cam, animMultiplier);
+    GameObjectManager::getInstance()->DrawObjects();
 
     //ImGui::Render();
     //ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

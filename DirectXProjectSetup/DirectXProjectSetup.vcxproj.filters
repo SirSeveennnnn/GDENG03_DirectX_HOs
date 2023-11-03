@@ -61,6 +61,18 @@
     <Filter Include="Engine\UI\UIScreens">
       <UniqueIdentifier>{319bb16c-a990-482a-ab1b-6bc51f2d0c25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\UI\UIScreens\MenuToolBar">
+      <UniqueIdentifier>{5eb811ca-9c7e-4847-bff7-7d880c2669ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI\UIScreens\SceneOutliner">
+      <UniqueIdentifier>{ffa0cf81-2727-4852-8d1f-9f17415a8f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI\UIScreens\InspectorWindow">
+      <UniqueIdentifier>{d1ff8340-25c5-4b0f-930a-5f5166d64867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI\UIScreens\Engine Profiler">
+      <UniqueIdentifier>{052e176b-90dc-490f-9c14-3c8109367537}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,7 +173,19 @@
       <Filter>Engine\UI\UIManager</Filter>
     </ClCompile>
     <ClCompile Include="UI_MenuToolBar.cpp">
-      <Filter>Engine\UI\UIScreens</Filter>
+      <Filter>Engine\UI\UIScreens\MenuToolBar</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SceneOutliner.cpp">
+      <Filter>Engine\UI\UIScreens\SceneOutliner</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InspectorWindow.cpp">
+      <Filter>Engine\UI\UIScreens\InspectorWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_EngineProfiler.cpp">
+      <Filter>Engine\UI\UIScreens\Engine Profiler</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Engine\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,7 +287,19 @@
       <Filter>Engine\UI\UIManager</Filter>
     </ClInclude>
     <ClInclude Include="UI_MenuToolBar.h">
-      <Filter>Engine\UI\UIScreens</Filter>
+      <Filter>Engine\UI\UIScreens\MenuToolBar</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SceneOutliner.h">
+      <Filter>Engine\UI\UIScreens\SceneOutliner</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InspectorWindow.h">
+      <Filter>Engine\UI\UIScreens\InspectorWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_EngineProfiler.h">
+      <Filter>Engine\UI\UIScreens\Engine Profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Engine\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

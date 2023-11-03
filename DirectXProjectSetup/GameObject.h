@@ -31,6 +31,9 @@ public:
     void setRotation(Vector3D rot);
     Vector3D getLocalRotation();
 
+    virtual void OnUpdate(Matrix4x4 viewMatrix, float animMultiplier);
+    virtual void Draw();
+
     string getName();
 
     struct Vertex {
