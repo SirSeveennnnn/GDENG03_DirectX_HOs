@@ -58,6 +58,14 @@ void GameObjectManager::CreateObject(GameObjectType type)
         cube->setScale(1, 1, 1);
         gameObjectList.push_back(cube);
     }
+    else if (type == TypePlane)
+    {
+        Cube* cube = new Cube("Plane", windowWidth, windowHeight);
+        cube->setPosition(0, -1, 0);
+        cube->setRotation(0, 0, 0);
+        cube->setScale(5, 0.001f, 5);
+        gameObjectList.push_back(cube);
+    }
 }
 
 void GameObjectManager::DeleteObject(GameObject* gameObject)

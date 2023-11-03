@@ -31,6 +31,11 @@ void UI_InspectorWindow::DrawUI(){
         float objectScale[3] = { selectedObject->getLocalScale().m_x, selectedObject->getLocalScale().m_y, selectedObject->getLocalScale().m_z };
         ImGui::DragFloat3("Scale", objectScale, 1);
 
+        selectedObject->setScale(objectScale[0], objectScale[1], objectScale[2]);
+        selectedObject->setPosition(objectPos[0], objectPos[1], objectPos[2]);
+        selectedObject->setRotation(objectRot[0], objectRot[1], objectRot[2]);
+      
+
     }
     
 

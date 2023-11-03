@@ -1,4 +1,4 @@
-﻿  AppWindow.cpp
+﻿  UI_InspectorWindow.cpp
 E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(41,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(42,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(43,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
@@ -16,67 +16,4 @@ E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(148,53): 
 E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(149,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(150,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(151,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(84,140): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\AppWindow.cpp(84,69): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-  Cube.cpp
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(41,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(42,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(43,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(44,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(49,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(50,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(51,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(52,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(57,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(58,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(59,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(60,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(114,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(148,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(149,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(150,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(151,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Cube.cpp(87,85): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-  EngineTime.cpp
-  GameObjectManager.cpp
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(41,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(42,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(43,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(44,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(49,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(50,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(51,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(52,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(57,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(58,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(59,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(60,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(114,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(148,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(149,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(150,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(151,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\GameObjectManager.cpp(43,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  UI_EngineProfiler.cpp
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\UI_EngineProfiler.cpp(13,51): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Window.cpp
-  main.cpp
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(41,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(42,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(43,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(44,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(49,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(50,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(51,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(52,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(57,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(58,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(59,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(60,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(114,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(148,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(149,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(150,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\.School\GDENG03\DirectXProjectSetup\DirectXProjectSetup\Matrix4x4.h(151,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
   DirectXProjectSetup.vcxproj -> E:\.School\GDENG03\DirectXProjectSetup\x64\Debug\DirectXProjectSetup.exe
