@@ -73,6 +73,12 @@
     <Filter Include="Engine\UI\UIScreens\Engine Profiler">
       <UniqueIdentifier>{052e176b-90dc-490f-9c14-3c8109367537}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{78eb4e14-f609-474e-b72c-acbfeae79c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ECS">
+      <UniqueIdentifier>{0979ca0a-5ad1-433f-8e50-54990a46fab7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -187,6 +193,18 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="AComponent.cpp">
+      <Filter>Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponentSystem.cpp">
+      <Filter>Engine\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -300,6 +318,18 @@
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
       <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponent.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponentSystem.h">
+      <Filter>Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Engine\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

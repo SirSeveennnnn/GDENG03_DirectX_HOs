@@ -2,6 +2,8 @@
 #include "EngineTime.h"
 #include "imgui.h"
 
+#define NOMINMAX
+
 //Window* window=nullptr;
 
 Window::Window()

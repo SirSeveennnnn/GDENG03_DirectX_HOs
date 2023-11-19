@@ -12,6 +12,9 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
+#include <reactphysics3d/reactphysics3d.h>
+#include "PhysicsSystem.h"
+using namespace reactphysics3d;
 
 struct vertex
 {
@@ -90,51 +93,13 @@ void AppWindow::onCreate()
     cameraPosition.m_z = -2;
 
     UIManager::initialize(this->m_hwnd);
+
+    BaseComponentSystem::initialize();
  
 }
 
 void AppWindow::onUpdate()
 {
-    /*
-    ImGui_ImplDX11_NewFrame();
-    ImGui_ImplWin32_NewFrame();
-    ImGui::NewFrame();
-
-    if (show_demo_window)
-    {
-        ImGui::ShowDemoWindow();
-    }
-   
-
-    static float f = 0.0f;
-    static int counter = 0;
-
-    ImGuiWindowFlags flag = 64;
-    ImGui::Begin("Scene Settings", 0, flag);
-    ImGui::Checkbox("Demo Window", &show_demo_window);
-
-    ImGui::ColorEdit3("clear color", (float*)&clear_color); 
-
-    if (animation)
-    {
-        if (ImGui::Button("Pause Animation"))
-        {
-            animation = !animation;
-            animMultiplier = 0;
-        }
-    }
-    else
-    {
-        if (ImGui::Button("Start Animation"))
-        {
-            animation = !animation;
-            animMultiplier = 1;
-        }
-    }
-
-    ImGui::End();
-    */
-    
 
     InputSystem::getInstance()->update();
 
@@ -149,8 +114,13 @@ void AppWindow::onUpdate()
 
     UIManager::getInstance()->drawAllUI();
 
+ 
+
     GameObjectManager::getInstance()->Update(m_world_cam, animMultiplier);
     GameObjectManager::getInstance()->DrawObjects();
+
+
+    BaseComponentSystem::getInstance()->getPhysicsSystem()->updateAllComponents();
 
     //ImGui::Render();
     //ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

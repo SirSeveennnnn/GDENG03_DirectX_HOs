@@ -5,6 +5,8 @@
 #include"GraphicsEngine.h"
 #include<iostream>
 
+#include "PhysicsComponent.h"
+
 GameObjectManager* GameObjectManager::instance = nullptr;
 
 void GameObjectManager::Update(Matrix4x4 viewMatrix, float animMultiplier)
@@ -57,6 +59,8 @@ void GameObjectManager::CreateObject(GameObjectType type)
         cube->setRotation(0, 0, 0);
         cube->setScale(1, 1, 1);
         gameObjectList.push_back(cube);
+
+        PhysicsComponent* component = new PhysicsComponent(cube->getName(), cube);
     }
     else if (type == TypePlane)
     {

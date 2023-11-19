@@ -108,47 +108,7 @@ Cube::~Cube()
 
 void Cube::OnUpdate(Matrix4x4 viewMatrix, float animMultiplier)
 {
-    //Question 2 && Question 4
-    //localRotation.m_y += 0.01f * animationSpeed;
-    //localRotation.m_x += 0.01f * animationSpeed;
-    //localRotation.m_z += 0.01f * animationSpeed;
 
-    //Question 3
-    //lerp
-    //(a * (1.0 - f)) + (b * f);
-   /*
-    
-    if (lerpValue < 1 && !dir)
-    {
-        lerpValue += 0.01f;
-    }
-    else if (lerpValue > 0 && dir)
-    {
-        lerpValue -= 0.01f;
-    }
-
-    if (lerpValue > 1)
-    {
-        dir = true;
-    }
-    else if (lerpValue < 0)
-    {
-        dir = false;
-    }
-
-    Vector3D currentPos;
-    currentPos.m_x = (startPos.m_x * (1.0f - lerpValue) + (endPos.m_x * lerpValue));
-    currentPos.m_y = (startPos.m_y * (1.0f - lerpValue) + (endPos.m_y * lerpValue));
-    currentPos.m_z = (startPos.m_z * (1.0f - lerpValue) + (endPos.m_z * lerpValue));
-
-    Vector3D currentScale;
-    currentScale.m_x = (startScale.m_x * (1.0f - lerpValue) + (endScale.m_x * lerpValue));
-    currentScale.m_y = (startScale.m_y * (1.0f - lerpValue) + (endScale.m_y * lerpValue));
-    currentScale.m_z = (startScale.m_z * (1.0f - lerpValue) + (endScale.m_z * lerpValue));
-
-    cc.m_world.setScale(currentScale);
-    cc.m_world.setTranslation(currentPos);
-    */
     localRotation.m_y += 0.01f * animationSpeed * animMultiplier;
     localRotation.m_x += 0.01f * animationSpeed * animMultiplier;
     localRotation.m_z += 0.01f * animationSpeed * animMultiplier;

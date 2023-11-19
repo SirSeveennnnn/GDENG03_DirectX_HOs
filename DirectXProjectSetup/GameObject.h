@@ -36,6 +36,11 @@ public:
 
     string getName();
 
+    // openGL matrix to our matrix implementation
+    void recomputeMatrix(float matrix[16]);
+    // our matrix implementation to openGL matrix
+    float* getPhysicsLocalMatrix();
+
     struct Vertex {
         Vector3D position;
         Vector3D color;
